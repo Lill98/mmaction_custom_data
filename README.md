@@ -70,11 +70,11 @@ mmaction_custom_data
 │   ├── customsdata
 │   │   ├── annotations
 |   |   |               ├── {your_class_name_video1}_test_split1.txt
-│   │   │                                                           ├── {video_name1} {chose(0,1,2: where 0:val, 1:train, 2:test)}
-│   │   │                                                           ├── {video_name1} {chose(0,1,2: where 0:val, 1:train, 2:test)}
-│   │   │                 ├── {your_class_name_video2}_test_split2.txt
-│   │   │                 ├── ...
-│   │   │                 ├── {your_class_name_videon}_test_split3.txt
+│   │   │               |                                            ├── {video_name1} {chose(0,1,2: where 0:val, 1:train, 2:test)}
+│   │   │               |                                            ├── {video_name1} {chose(0,1,2: where 0:val, 1:train, 2:test)}
+│   │   │               ├── {your_class_name_video2}_test_split2.txt
+│   │   │               ├── ...
+│   │   │               ├── {your_class_name_videon}_test_split3.txt
 │   │   ├── videos
                   ├── your_class_name_video1
                   │                         ├── video_name1
