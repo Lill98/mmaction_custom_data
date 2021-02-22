@@ -1,4 +1,5 @@
 # MMAction
+this repo clone from [mmaction](https://github.com/open-mmlab/mmdetection), I had fixed it to use with custom data
 
 ## Introduction
 MMAction is an open source toolbox for action understanding based on PyTorch.
@@ -54,9 +55,39 @@ Please refer to [INSTALL.md](https://github.com/open-mmlab/mmaction/blob/master/
 Update: for Docker installation, Please refer to [DOCKER.md](https://github.com/open-mmlab/mmaction/blob/master/DOCKER.md) for using docker for this project.
 
 ## Data preparation
+If you want to prepare data with HMD51, UCF101, ... follow below links:
 Please refer to [DATASET.md](https://github.com/open-mmlab/mmaction/blob/master/DATASET.md) for a general knowledge of data preparation.
 Detailed documents for the supported datasets are available in `data_tools/`.
+If you want to prepare custom data.
+Place your video in mmaction/data/customdata/videos
+with structure of directory:
+mmaction_custom_data
+├── mmaction
+├── tools
+├── configs
+├── data
+│   ├── customsdata
+│   │   ├── annotations
+|   |   |               ├── {your_class_name_video1}_test_split1.txt
+│   │   │                                                           ├── {video_name1} {chose(0,1,2: where 0:val, 1:train, 2:test)}
+│   │   │                                                           ├── {video_name1} {chose(0,1,2: where 0:val, 1:train, 2:test)}
+│   │   │                 ├── {your_class_name_video2}_test_split2.txt
+│   │   │                 ├── ...
+│   │   │                 ├── {your_class_name_videon}_test_split3.txt
+│   │   ├── videos
+                  ├── your_class_name_video1
+                  │                         ├── video_name1
+                  │                         ├── ....
+                  ├──your_class_name_video2
+                  │                         ├── video_name
+                  │                         ├── ....     
 
+
+```
+1. cd to mmaction_custom_data/data_tools/customdata
+2. !bash extract_rgb_frames.sh
+3. !bash generate_filelist.sh
+remember fix your path_file in 2&3
 ## Get started
 Please refer to [GETTING_STARTED.md](https://github.com/open-mmlab/mmaction/blob/master/GETTING_STARTED.md) for detailed examples and abstract usage.
 
