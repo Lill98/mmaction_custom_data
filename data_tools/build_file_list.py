@@ -57,9 +57,9 @@ def main():
     # print("----------",frame_info)
     if args.dataset == 'hmdb51':
         split_tp = parse_hmdb51_splits(args.level)
-    if args.dataset == 'ucf101':
+    elif args.dataset == 'ucf101':
         split_tp = parse_ucf101_splits(args.level)
-    if args.dataset == 'kinetics400':
+    elif args.dataset == 'kinetics400':
         split_tp = parse_kinetics_splits(args.level)
     else:
         split_tp = parse_customdata_splits(args.level)
