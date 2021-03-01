@@ -85,9 +85,11 @@ mmaction_custom_data
 
 
 ```
-1. cd to mmaction_custom_data/data_tools/customdata
-2. !bash extract_rgb_frames.sh
-3. !bash generate_filelist.sh
+1. Put your video like structure videos above
+2. Run create_anotation.py --video_paths your_video_path. This will create all needed file in annotations folder for you
+3. cd to mmaction_custom_data/data_tools/customdata
+4. !bash extract_rgb_frames.sh
+5. !bash generate_filelist.sh
 remember fix your path_file in 2&3
 ## Get started
 Please refer to [GETTING_STARTED.md](https://github.com/open-mmlab/mmaction/blob/master/GETTING_STARTED.md) for detailed examples and abstract usage.
