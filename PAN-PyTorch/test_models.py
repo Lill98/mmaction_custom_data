@@ -14,7 +14,7 @@ from ops.models import PAN
 from ops.transforms import *
 from ops import dataset_config
 from torch.nn import functional as F
-
+from sklearn.metrics import f1_score
 # options
 parser = argparse.ArgumentParser(description="PAN testing on the full validation set")
 parser.add_argument('dataset', type=str)
@@ -330,8 +330,10 @@ if args.csv_file is not None:
 
 
 cf = confusion_matrix(video_labels, video_pred).astype(float)
-
+print("confusion_matrix", cf)
 np.save('cm.npy', cf)
+f1 = f1_score(y_true = video_labels,y_pred = video_pred, average = "micro" )
+print("f11111", f1)
 cls_cnt = cf.sum(axis=1)
 cls_hit = np.diag(cf)
 
