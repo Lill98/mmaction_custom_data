@@ -1,5 +1,5 @@
 # MMAction
-this repo clone from [mmaction](https://github.com/open-mmlab/mmdetection), I had fixed it to use with custom data
+this repo clone from [mmaction](https://github.com/open-mmlab/mmdetection), I had fixed it to use with custom data. I also custom [PAN](https://github.com/zhang-can/PAN-PyTorch) repo to run with custom data. 
 
 ## Introduction
 MMAction is an open source toolbox for action understanding based on PyTorch.
