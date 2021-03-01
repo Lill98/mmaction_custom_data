@@ -287,12 +287,12 @@ def mimic_ucf101(frame_path, anno_dir):
         with open(splitTrainFile, 'w') as target_train_f:
             for class_name in classDict.keys():
                 fname = class_name + '_test_split%d.txt' % (split_id)
-                print("fname", fname)
+#                 print("fname", fname)
                 fname_path = os.path.join(anno_dir, fname)
-                print("fname_path",fname_path)
+#                 print("fname_path",fname_path)
                 source_f = open(fname_path, 'r')
                 source_info = source_f.readlines()
-                print("source_info",source_info)
+#                 print("source_info",source_info)
                 for _, source_line in enumerate(source_info):
                     cur_info = source_line.strip().split(' ')
                     

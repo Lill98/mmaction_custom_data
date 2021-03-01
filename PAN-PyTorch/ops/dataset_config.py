@@ -43,11 +43,13 @@ def return_ucf101(modality):
 
 
 def return_hmdb51(modality):
+    global ROOT_DATASET
+    ROOT_DATASET = "/content/mmaction_custom_data/data/hmdb51/"
     filename_categories = 51
     if modality in ['RGB', 'PA', 'Lite']:
-        root_data = ROOT_DATASET + 'hmdb51_frames'
-        filename_imglist_train = '/data/zhangcan/file_lists/hmdb51/split1/train.txt'
-        filename_imglist_val = '/data/zhangcan/file_lists/hmdb51/split1/val.txt'
+        root_data = ROOT_DATASET + 'rawframes'
+        filename_imglist_train = '/content/mmaction_custom_data/data/hmdb51/hmdb51_train_split_1_rawframes.txt'
+        filename_imglist_val = '/content/mmaction_custom_data/data/hmdb51/hmdb51_val_split_1_rawframes.txt'
         prefix = 'img_{:05d}.jpg'
     elif modality == 'Flow':
         root_data = ROOT_DATASET + 'HMDB51/images'
@@ -57,6 +59,7 @@ def return_hmdb51(modality):
     else:
         raise NotImplementedError('no such modality:' + modality)
     return filename_categories, filename_imglist_train, filename_imglist_val, root_data, prefix
+
 
 
 def return_something(modality):
