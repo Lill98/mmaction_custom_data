@@ -12,6 +12,7 @@ from torch.nn import functional as F
 from sklearn.metrics import f1_score
 import cv2
 import torch.utils.data as data
+import mmcv
 
 from PIL import Image
 import os
@@ -53,6 +54,7 @@ parser.add_argument('--num_set_segments',type=int, default=1,help='TODO: select 
 parser.add_argument('--pretrain', type=str, default='imagenet')
 parser.add_argument('--lmdb', default=False, action="store_true", help='use lmdb format dataset')
 parser.add_argument('--VAP', default=False, action="store_true", help='use VAP for various-timescale aggregation')
+parser.add_argument("--extract_cv2", default=False, action="store_false", help="use cv2 to extract video or not")
 args = parser.parse_args()
         
 def parse_shift_option_from_log_name(log_name):
@@ -201,28 +203,40 @@ try:
     os.mkdir(out_full_path)
 except OSError:
     pass
-
-cap = cv2.VideoCapture(args.video_path)
-length_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-print(length_frames)
-if (cap.isOpened()== False):  
-  	print("Error opening video  file")   
-# Read until video is completed 
-i = 0 
-while(cap.isOpened()):    
-  	# Capture frame-by-frame 
-  	ret, frame = cap.read() 
-  	if ret == True:
-		  cv2.imwrite( '{}/img_{:05d}.jpg'.format(out_full_path, i + 1), frame)
-		  i += 1
-		  if i > length_frames:
-			  break     
-  # Break the loop 
-  	else:
-		  break  
-# When everything done, release  
-# the video capture object 
-cap.release() 
+if args.extract_cv2:
+    cap = cv2.VideoCapture(args.video_path)
+    length_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    print(length_frames)
+    if (cap.isOpened()== False):  
+        print("Error opening video  file")   
+    # Read until video is completed 
+    i = 0 
+    while(cap.isOpened()):
+        # Capture frame-by-frame 
+        ret, frame = cap.read()
+        if ret == True:
+            cv2.imwrite('{}/img_{:05d}.jpg'.format(out_full_path, i + 1), frame)
+            i += 1
+            if i > length_frames:
+                break     
+      # Break the loop 
+        else:
+            break  
+    # When everything done, release  
+    # the video capture object 
+    cap.release() 
+else:
+    out_full_path = "./video_frames"
+    vr = mmcv.VideoReader(args.video_path)
+    length_frames = len(vr)
+    for i in range(len(vr)):
+        if vr[i] is not None:
+            mmcv.imwrite(vr[i], '{}/img_{:05d}.jpg'.format(out_full_path, i + 1))
+        else:
+            print('[Warning] length inconsistent!'
+                  'Early stop with {} out of {} frames'.format(i + 1, len(vr)))
+            break
+    
 
 #take position start of segment
 segment_indices = _get_test_indices(length_frames)
